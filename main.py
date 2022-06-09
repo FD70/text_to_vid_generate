@@ -12,7 +12,7 @@ OUTPUT_FILE_PATH = os.path.join(os.getcwd(), "out_vid")
 # OUTPUT_FRAME_SHAPE X, Y
 # FRAME = (960, 540)
 FRAME = (1920, 1080)
-FPS_OUT = 60.0
+FPS_OUT = 10.0
 
 COLOR_WHITE = '#ffffff'
 FONT_SIZE = 48
@@ -71,7 +71,7 @@ def book_to_vid_generate(txt_file_path):
 
     vout = get_video_writer(OUTPUT_FILE_NAME)
 
-    pause_generate(vout, 60)
+    pause_generate(vout, int(FPS_OUT)) # int(FPS_OUT) - generate one second pause
 
     with open(txt_file_path, 'r', encoding="utf-8") as _file:
         _file_lines = _file.read().splitlines()
@@ -98,9 +98,8 @@ def book_to_vid_generate(txt_file_path):
 
             recframe = numpy.array(image)
 
-            # APPEND x FRAMES
-            for i in range(6):
-                vout.write(recframe)
+            # for i in range(6): # APPEND x FRAMES
+            vout.write(recframe)
 
     vout.release()
 
